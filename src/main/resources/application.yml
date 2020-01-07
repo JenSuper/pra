@@ -1,0 +1,11 @@
+
+
+server:
+  port: 8888
+spring:
+  mail:
+    host: smtp.163.com # SMTP服务器地址
+    username: JenSuper@163.com
+    password: JC19950217
+    properties:
+      from: JenSuper@163.com # 邮件发信人0
