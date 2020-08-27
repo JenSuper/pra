@@ -108,17 +108,17 @@
 //            String value = String.valueOf(formulaEvaluator.evaluate(cell).getNumberValue());
 //            return formatDateToString(value);
 //        }
-//        /*
-//         * if (Cell.CELL_TYPE_NUMERIC == cell.getCellType()) { if
-//         * (HSSFDateUtil.isCellDateFormatted(cell)) { cellValue =
-//         * getRightStr(cell.getDateCellValue() + ""); } else {
-//         *
-//         * cellValue = getRightStr(cell.getNumericCellValue() + ""); } } else if
-//         * (Cell.CELL_TYPE_STRING == cell.getCellType()) { cellValue =
-//         * cell.getStringCellValue(); } else if (Cell.CELL_TYPE_BOOLEAN ==
-//         * cell.getCellType()) { cellValue = cell.getBooleanCellValue() + ""; }
-//         * else { cellValue = cell.getStringCellValue(); }
-//         */
+        /*
+         * if (Cell.CELL_TYPE_NUMERIC == cell.getCellType()) { if
+         * (HSSFDateUtil.isCellDateFormatted(cell)) { cellValue =
+         * getRightStr(cell.getDateCellValue() + ""); } else {
+         *
+         * cellValue = getRightStr(cell.getNumericCellValue() + ""); } } else if
+         * (Cell.CELL_TYPE_STRING == cell.getCellType()) { cellValue =
+         * cell.getStringCellValue(); } else if (Cell.CELL_TYPE_BOOLEAN ==
+         * cell.getCellType()) { cellValue = cell.getBooleanCellValue() + ""; }
+         * else { cellValue = cell.getStringCellValue(); }
+         */
 //        HSSFDataFormatter hSSFDataFormatter = new HSSFDataFormatter();
 //        String cellValue = hSSFDataFormatter.formatCellValue(cell); // 使用EXCEL原来格式的方式取得值
 //        // 处理特殊情况
