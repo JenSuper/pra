@@ -36,7 +36,7 @@ public class AsyncService {
     @Async()
     public void completableFutureTask(String start) {
         // 打印日志
-        log.warn(Thread.currentThread().getName() + "start this task!");
+        log.warn(Thread.currentThread().getName() + "start this !");
         // 找到特定字符/字符串开头的电影
         List<String> results =
                 movies.stream().filter(movie -> movie.startsWith(start)).collect(Collectors.toList());

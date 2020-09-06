@@ -265,9 +265,13 @@ public class Demo {
 
     @Test
     public void test12312(){
-        String s = "`123_tmp";
-        String tmp = s.substring(0, s.indexOf("_tmp"));
-        System.out.println(tmp);
+//        String s = "2020/8/10 上午8:00";
+//        String s = "2020/8/10 8:00";
+        String s = "1";
+        Date date = new Date(s);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String format = simpleDateFormat.format(date);
+        System.out.println(format);
     }
 
 
