@@ -231,48 +231,18 @@ public class Demo {
 
     @Test
     public void test22() {
-        String content = "\"id\":64,\"map\":100";
-        String idRegex = "(\"[a-zA-Z]*?(Id|id)\"):([0-9]+)\\,";
+        String content = "INSERT INTO `base_component` VALUES (6, '矩形', NULL, '{}', NULL, 'rectangle', NULL, 'material', 'http://172.24.103.117:8888/group1/M00/00/2F/rBhndV7U4cuAAEfsAAADg4p73-E725.png', NULL, NULL, 0, NULL, 0, '2020-04-16 17:39:41', '2020-05-11 15:40:45', 101, NULL, NULL);";
+        String idRegex = "([hH][tT]{2}[pP]://|[hH][tT]{2}[pP][sS]://|[wW]{3}.|[wW][aA][pP].|[fF][tT][pP].|[fF][iI][lL][eE].)[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]";
         Matcher matcherIdStr = Pattern.compile(idRegex).matcher(content);
         while (matcherIdStr.find()) {
             // 匹配到的id及value
             String group = matcherIdStr.group(0);
-            String idKey = matcherIdStr.group(1);
-            String idValue = matcherIdStr.group(3);
             System.out.println(group);
-            System.out.println(idKey);
-            System.out.println(idValue);
-            String s = "(\\(\\)|\\[\\])";
         }
 
     }
 
-    @Test
-    public void test33() {
-        String bodyStr = "\"[a-zA-Z]*?(Id|id)\":[0-9]+";
-        String content = "{\"code\":0,\"data\":{\"count\":8,\"current\":1,\"data\":[{\"avatar\":\"http://172.24.103.102:8888/group1/M00/01/27/rBhnZl7Hj_aAdP0GAAB22Jwq9og20.jpeg\",\"cockpitId\":123,\"createBy\":null,\"createByAvatar\":\"\",\"createByName\":\"\",\"createByNickName\":\"\",\"dashboardDataSetCount\":2,\"dataSetCount\":11,\"dataSourceCount\":20,\"description\":\"\",\"gmtCreate\":\"2020-05-08 10:46:44\",\"id\":146,\"markStatus\":1,\"name\":\"20200508_jichao\",\"orgId\":1,\"orgName\":\"卓朗科技\",\"type\":\"open\",\"userId\":120,\"visualWidgetCount\":2},{\"avatar\":\"\",\"cockpitCount\":null,\"createBy\":null,\"createByAvatar\":\"\",\"createByName\":\"\",\"createByNickName\":\"\",\"dashboardDataSetCount\":0,\"dataSetCount\":1,\"dataSourceCount\":1,\"description\":\"\",\"gmtCreate\":\"2020-06-18 09:27:31\",\"id\":246,\"markStatus\":0,\"name\":\"20200618_jichao\",\"orgId\":1,\"orgName\":\"\",\"type\":\"open\",\"userId\":120,\"visualWidgetCount\":0},{\"avatar\":\"\",\"cockpitCount\":null,\"createBy\":null,\"createByAvatar\":\"\",\"createByName\":\"\",\"createByNickName\":\"\",\"dashboardDataSetCount\":0,\"dataSetCount\":1,\"dataSourceCount\":1,\"description\":\"\",\"gmtCreate\":\"2020-05-29 10:36:27\",\"id\":195,\"markStatus\":0,\"name\":\"20200529_jichao\",\"orgId\":1,\"orgName\":\"\",\"type\":\"open\",\"userId\":120,\"visualWidgetCount\":0},{\"avatar\":\"\",\"cockpitCount\":null,\"createBy\":null,\"createByAvatar\":\"\",\"createByName\":\"\",\"createByNickName\":\"\",\"dashboardDataSetCount\":0,\"dataSetCount\":0,\"dataSourceCount\":1,\"description\":\"\",\"gmtCreate\":\"2020-05-26 10:01:11\",\"id\":172,\"markStatus\":0,\"name\":\"工作区02\",\"orgId\":1,\"orgName\":\"\",\"type\":\"open\",\"userId\":120,\"visualWidgetCount\":0},{\"avatar\":\"\",\"cockpitCount\":null,\"createBy\":null,\"createByAvatar\":\"\",\"createByName\":\"\",\"createByNickName\":\"\",\"dashboardDataSetCount\":0,\"dataSetCount\":0,\"dataSourceCount\":0,\"description\":\"\",\"gmtCreate\":\"2020-05-15 14:59:44\",\"id\":148,\"markStatus\":0,\"name\":\"20200515_jichao\",\"orgId\":1,\"orgName\":\"卓朗科技\",\"type\":\"open\",\"userId\":120,\"visualWidgetCount\":0},{\"avatar\":\"\",\"cockpitCount\":null,\"createBy\":null,\"createByAvatar\":\"\",\"createByName\":\"\",\"createByNickName\":\"\",\"dashboardDataSetCount\":1,\"dataSetCount\":2,\"dataSourceCount\":2,\"description\":\"\",\"gmtCreate\":\"2020-04-26 11:17:39\",\"id\":140,\"markStatus\":0,\"name\":\"工作区-jichao-0426\",\"orgId\":1,\"orgName\":\"卓朗科技\",\"type\":\"open\",\"userId\":120,\"visualWidgetCount\":2},{\"avatar\":\"\",\"cockpitCount\":null,\"createBy\":null,\"createByAvatar\":\"\",\"createByName\":\"\",\"createByNickName\":\"\",\"dashboardDataSetCount\":1,\"dataSetCount\":3,\"dataSourceCount\":3,\"description\":\"\",\"gmtCreate\":\"2020-04-08 16:06:28\",\"id\":134,\"markStatus\":0,\"name\":\"jichao_0408\",\"orgId\":1,\"orgName\":\"卓朗科技\",\"type\":\"open\",\"userId\":120,\"visualWidgetCount\":2},{\"avatar\":\"\",\"cockpitCount\":null,\"createBy\":null,\"createByAvatar\":\"\",\"createByName\":\"\",\"createByNickName\":\"\",\"dashboardDataSetCount\":10,\"dataSetCount\":18,\"dataSourceCount\":25,\"description\":\"\",\"gmtCreate\":\"2020-03-03 16:54:49\",\"id\":112,\"markStatus\":0,\"name\":\"jichao_0303\",\"orgId\":1,\"orgName\":\"卓朗科技\",\"type\":\"open\",\"userId\":120,\"visualWidgetCount\":9}],\"size\":15},\"msg\":\"操作成功\"}";
-        Matcher matcher = Pattern.compile(bodyStr).matcher(content);
-        while (matcher.find()) {
-            String group0 = matcher.group(0);
-            String group1 = matcher.group(1);
-//            String s = group1.replaceAll("^[0-9]+", "");
-//            String group = group1.replaceAll(s, "\"id\":" + "123");
-            System.out.println(group0);
-            System.out.println(group1);
-        }
-    }
 
-
-    @Test
-    public void test12312(){
-//        String s = "2020/8/10 上午8:00";
-//        String s = "2020/8/10 8:00";
-        String s = "1";
-        Date date = new Date(s);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String format = simpleDateFormat.format(date);
-        System.out.println(format);
-    }
 
 
 

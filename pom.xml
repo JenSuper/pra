@@ -136,6 +136,14 @@
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.esri.geometry/esri-geometry-api -->
+        <dependency>
+            <groupId>com.esri.geometry</groupId>
+            <artifactId>esri-geometry-api</artifactId>
+            <version>2.2.2</version>
+        </dependency>
+
+
     </dependencies>
 
 

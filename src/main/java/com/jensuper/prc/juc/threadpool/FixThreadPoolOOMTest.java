@@ -12,6 +12,7 @@ import java.util.concurrent.Executors;
 public class FixThreadPoolOOMTest {
 
     public static void main(String[] args) {
+        Executors.newWorkStealingPool();
         ExecutorService executorService = Executors.newFixedThreadPool(1);
         for (int i = 0; i < Integer.MAX_VALUE; i++) {
             executorService.execute(new SubTask());
