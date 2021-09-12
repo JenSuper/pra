@@ -1,0 +1,137 @@
+楼栋表包含8个字段，id为主键，作为数据唯一标识id用来存储主键ID，name用来存储楼栋名，version用来存储乐观锁，deleted用来存储逻辑删除字段(0:未删除，1:已删除)，gmt_create用来存储创建时间，gmt_modified用来存储更新时间，create_by用来存储创建人，update_by用来存储更新人，表的设计如表4.1所示
+
+表4.1  楼栋表（build）
+
+id	bigint	19	主键ID
+name	varchar	32	楼栋名
+version	int	10	乐观锁
+deleted	tinyint	3	逻辑删除字段(0:未删除，1:已删除)
+gmt_create	datetime	19	创建时间
+gmt_modified	datetime	19	更新时间
+create_by	bigint	19	创建人
+update_by	bigint	19	更新人
+
+=================================================================
+
+投诉表包含11个字段，id为主键，作为数据唯一标识id用来存储主键ID，content用来存储投诉内容，status用来存储状态 0：未处理，1：已处理，owner_id用来存储业主ID，result用来存储处理结果，version用来存储乐观锁，deleted用来存储逻辑删除字段(0:未删除，1:已删除)，gmt_create用来存储创建时间，gmt_modified用来存储更新时间，create_by用来存储创建人，update_by用来存储更新人，表的设计如表4.2所示
+
+表4.2  投诉表（complain）
+
+id	bigint	19	主键ID
+content	TEXT	65535	投诉内容
+status	smallint	5	状态 0：未处理，1：已处理
+owner_id	bigint	19	业主ID
+result	TEXT	65535	处理结果
+version	int	10	乐观锁
+deleted	tinyint	3	逻辑删除字段(0:未删除，1:已删除)
+gmt_create	datetime	19	创建时间
+gmt_modified	datetime	19	更新时间
+create_by	bigint	19	创建人
+update_by	bigint	19	更新人
+
+=================================================================
+
+房屋表包含13个字段，id为主键，作为数据唯一标识id用来存储主键ID，name用来存储房间名，area用来存储面积，status用来存储房屋状态 0：未入住，1：已入住，owner_id用来存储业主ID，source_unit_id用来存储所属单元，source_build_id用来存储所属楼栋，version用来存储乐观锁，deleted用来存储逻辑删除字段(0:未删除，1:已删除)，gmt_create用来存储创建时间，gmt_modified用来存储更新时间，create_by用来存储创建人，update_by用来存储更新人，表的设计如表4.3所示
+
+表4.3  房屋表（house）
+
+id	bigint	19	主键ID
+name	varchar	32	房间名
+area	varchar	32	面积
+status	smallint	5	房屋状态 0：未入住，1：已入住
+owner_id	bigint	19	业主ID
+source_unit_id	bigint	19	所属单元
+source_build_id	bigint	19	所属楼栋
+version	int	10	乐观锁
+deleted	tinyint	3	逻辑删除字段(0:未删除，1:已删除)
+gmt_create	datetime	19	创建时间
+gmt_modified	datetime	19	更新时间
+create_by	bigint	19	创建人
+update_by	bigint	19	更新人
+
+=================================================================
+
+业主信息表包含10个字段，id为主键，作为数据唯一标识id用来存储主键ID，name用来存储业主名称，contact用来存储联系方式，sex用来存储性别，version用来存储乐观锁，deleted用来存储逻辑删除字段(0:未删除，1:已删除)，gmt_create用来存储创建时间，gmt_modified用来存储更新时间，create_by用来存储创建人，update_by用来存储更新人，表的设计如表4.4所示
+
+表4.4  业主信息表（owner_info）
+
+id	bigint	19	主键ID
+name	varchar	32	业主名称
+contact	varchar	32	联系方式
+sex	varchar	32	性别
+version	int	10	乐观锁
+deleted	tinyint	3	逻辑删除字段(0:未删除，1:已删除)
+gmt_create	datetime	19	创建时间
+gmt_modified	datetime	19	更新时间
+create_by	bigint	19	创建人
+update_by	bigint	19	更新人
+
+=================================================================
+
+车位表包含10个字段，id为主键，作为数据唯一标识id用来存储主键ID，name用来存储车位名称，owner_id用来存储业主ID，status用来存储车位状态 0：未使用，1：购买，2：租赁，version用来存储乐观锁，deleted用来存储逻辑删除字段(0:未删除，1:已删除)，gmt_create用来存储创建时间，gmt_modified用来存储更新时间，create_by用来存储创建人，update_by用来存储更新人，表的设计如表4.5所示
+
+表4.5  车位表（park）
+
+id	bigint	19	主键ID
+name	varchar	32	车位名称
+owner_id	bigint	19	业主ID
+status	smallint	5	车位状态 0：未使用，1：购买，2：租赁
+version	int	10	乐观锁
+deleted	tinyint	3	逻辑删除字段(0:未删除，1:已删除)
+gmt_create	datetime	19	创建时间
+gmt_modified	datetime	19	更新时间
+create_by	bigint	19	创建人
+update_by	bigint	19	更新人
+
+=================================================================
+
+维修表包含11个字段，id为主键，作为数据唯一标识id用来存储主键ID，content用来存储维修内容，status用来存储状态 0：未处理，1：已处理，owner_id用来存储业主ID，result用来存储维修结果，version用来存储乐观锁，deleted用来存储逻辑删除字段(0:未删除，1:已删除)，gmt_create用来存储创建时间，gmt_modified用来存储更新时间，create_by用来存储创建人，update_by用来存储更新人，表的设计如表4.6所示
+
+表4.6  维修表（repair）
+
+id	bigint	19	主键ID
+content	TEXT	65535	维修内容
+status	smallint	5	状态 0：未处理，1：已处理
+owner_id	bigint	19	业主ID
+result	TEXT	65535	维修结果
+version	int	10	乐观锁
+deleted	tinyint	3	逻辑删除字段(0:未删除，1:已删除)
+gmt_create	datetime	19	创建时间
+gmt_modified	datetime	19	更新时间
+create_by	bigint	19	创建人
+update_by	bigint	19	更新人
+
+=================================================================
+
+用户表表包含10个字段，id为主键，作为数据唯一标识id用来存储，username用来存储用户名，password用来存储密码，email用来存储邮箱，version用来存储乐观锁版本，deleted用来存储逻辑删除字段(0:未删除，1:已删除)，gmt_create用来存储创建时间，gmt_modified用来存储更新时间，create_by用来存储创建人，update_by用来存储修改人，表的设计如表4.7所示
+
+表4.7  用户表表（sys_user）
+
+id	bigint	19	
+username	varchar	32	用户名
+password	varchar	32	密码
+email	varchar	50	邮箱
+version	int	10	乐观锁版本
+deleted	BIT	1	逻辑删除字段(0:未删除，1:已删除)
+gmt_create	datetime	19	创建时间
+gmt_modified	datetime	19	更新时间
+create_by	bigint	19	创建人
+update_by	bigint	19	修改人
+
+=================================================================
+
+单元表包含8个字段，id为主键，作为数据唯一标识id用来存储主键ID，name用来存储单元名称，version用来存储乐观锁，deleted用来存储逻辑删除字段(0:未删除，1:已删除)，gmt_create用来存储创建时间，gmt_modified用来存储更新时间，create_by用来存储创建人，update_by用来存储更新人，表的设计如表4.8所示
+
+表4.8  单元表（unit）
+
+id	bigint	19	主键ID
+name	varchar	32	单元名称
+version	int	10	乐观锁
+deleted	tinyint	3	逻辑删除字段(0:未删除，1:已删除)
+gmt_create	datetime	19	创建时间
+gmt_modified	datetime	19	更新时间
+create_by	bigint	19	创建人
+update_by	bigint	19	更新人
+
+=================================================================
+
