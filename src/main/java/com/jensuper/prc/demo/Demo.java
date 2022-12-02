@@ -1,17 +1,16 @@
 package com.jensuper.prc.demo;
 
+import cn.hutool.core.io.FileUtil;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Lists;
 import com.jensuper.prc.aop.entity.Record;
-import com.jensuper.prc.date.DateStyle;
-import com.jensuper.prc.entity.Person;
 import com.jensuper.prc.entity.SankeyChartData;
-import com.jensuper.prc.secret.DesUtils;
-import jdk.management.resource.internal.inst.SocketOutputStreamRMHooks;
+import com.jensuper.prc.entity.TreeDTO;
+import com.jensuper.prc.entity.User;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.http.HttpResponse;
-import org.apache.tomcat.util.http.ResponseUtil;
 import org.junit.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -22,7 +21,11 @@ import org.springframework.util.StopWatch;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.*;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -41,7 +44,7 @@ public class Demo {
         System.out.println(sumCount);
     }
 
-    public static void main(String[] args) {
+    public static void main1(String[] args) {
         int a = 10;
         int b = 10;
         sum(a, b);
@@ -263,16 +266,9 @@ public class Demo {
 
     @Test
     public void test123132(){
-        List<String> list = new ArrayList<>();
-        list.add("1");
-        list.add("2");
-        list.add("3");
-        list.stream().forEach(a->{
-            if (Objects.equals(a, "3")) {
-                list.remove(3);
-            }
-        });
-        System.out.println(list);
+        String format = "13%s,%s,table=%s";
+        String format1 = String.format(format, "one", "two", "%s");
+        System.out.println(String.format(format1, "three"));
     }
 
 
@@ -366,13 +362,153 @@ public class Demo {
 
     @Test
     public void test2222(){
-       List<String> list = new ArrayList<>();
-        list.add("dim_1");
-        list.add("dim_2");
-        Optional<String> first = list.stream().filter(a -> a.startsWith("fct_")).map(a -> a.replaceFirst("fct_", ""))
-                .sorted((a, b) -> -Integer.parseInt(a) - Integer.parseInt(b)).limit(1).findFirst();
-        if (first.isPresent()) {
-            System.out.println(first.get());
+        List<TreeDTO> nodeList = new TreeDTO().init();
+        List<TreeDTO> rootList = nodeList.stream().filter(t -> t.getPid().equals(0)).collect(Collectors.toList());
+        rootList.forEach(root->{
+            List<TreeDTO> child = this.getChild(root, nodeList);
+            root.setChildren(child);
+        });
+        System.out.println();
+    }
+
+    private List<TreeDTO> getChild(TreeDTO node,List<TreeDTO> nodeList) {
+        List<TreeDTO> childList = nodeList.stream().filter(t -> t.getPid().equals(node.getId())).collect(Collectors.toList());
+        childList.forEach(childNodeTmp->{
+            List<TreeDTO> child = this.getChild(childNodeTmp, nodeList);
+            childNodeTmp.setChildren(child);
+        });
+        return childList;
+    }
+    
+    @Test
+    public void test3() {
+        DecimalFormat format = new DecimalFormat("###,##0");
+        String s = format.format(9050173587L);
+    }
+
+    /**
+     * 千分位
+     * @param text
+     * @return
+     */
+    public static String formatThousand(String text) {
+        if (StringUtils.isBlank(text) || NumberUtils.isCreatable(text)) {
+            return null;
+        }
+        DecimalFormat df = null;
+        if (text.indexOf(".") > 0) {
+            int index = text.length() - text.indexOf(".") - 1;
+            if (index == 0) {
+                df = new DecimalFormat("###,##0.");
+            } else if (index == 1) {
+                df = new DecimalFormat("###,##0.0");
+            } else {
+                df = new DecimalFormat("###,##0.00");
+            }
+        } else {
+            df = new DecimalFormat("###,##0");
+        }
+        double number = 0.0;
+        try {
+            number = Double.parseDouble(text);
+        } catch (Exception e) {
+            number = 0.0;
+        }
+        return df.format(number);
+    }
+
+    @Test
+    public void test4() throws IOException {
+        String projectInfo = "project_info";
+        String pageSetting = "page_setting";
+        String updates = "updates";
+        String type = "boss";
+        StringBuilder sResult = new StringBuilder();
+        // 读取文件内容:
+        List<String> dataList = FileUtils.readLines(new File("/Users/chaoji/devlop/project/test/无标题.csv"), "UTF-8");
+        // 拼接数据
+        for (int i = 0; i < dataList.size(); i++) {
+            StringBuilder sValue = new StringBuilder();
+            String data = dataList.get(0);
+            String[] str = data.split(",");
+            for (String s : str) {
+                if (StringUtils.isBlank(s)) {
+                    sValue.append("null").append(",");
+                }else{
+                    if (NumberUtils.isCreatable(s)) {
+                        sValue.append(s).append(",");
+                    }else{
+                        sValue.append("'").append(s).append("'").append(",");
+                    }
+                }
+            }
+            sValue.deleteCharAt(sValue.length() - 1);
+
+            if (i == 0) {
+                String projectInfoSql = "INSERT INTO `" + projectInfo + "` (`display`, `code_name`, `dis_name`, `path_name`, `default_page`, `title`, `description`, `project`, `has_manual`, `dimensions`, `format_info`, `company_name`, `stock_code`) VALUES (%s);";
+                String result = String.format(projectInfoSql, sValue);
+                sResult.append(result);
+            }
+            if (i == 1) {
+                String pageSettingSql = "INSERT INTO `" + pageSetting + "` (`project_id`, `table_name`, `date_type`, `dimension_text`, `download_type`, `sort`, `hide_num`) VALUES (%s);";
+                String result = String.format(pageSettingSql, sValue);
+                sResult.append(result);
+            }
+            if (i == 2) {
+                String updatesSql = "INSERT INTO `" + updates + "` (`type`, `update_date`, `update_text`, `display_name`, `has_mail`, `project_id`, `update_params`) VALUES (%s);";
+                String result = String.format(updatesSql, sValue);
+                sResult.append(result);
+            }
+        }
+
+    }
+
+    // 读取CSV并且拼接成SQL直接执行（Java）
+    public static void main(String[] args) {
+        /**
+         *
+         */
+        try {
+            File file = new File("/Users/chaoji/devlop/project/test/无标题.csv");
+            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    //id,table_name,field_name
+                    String[] split = line.split(",");
+                    String id = split[0];
+                    String tableName = split[1];
+                    String fileName = split[2];
+                    Integer order = Integer.parseInt(split[3]);
+                    System.out.println(String.format("update table_info_copy1 set parent = (select data.id from (select id from table_info_copy1 where table_name = '%s' and field_name = '%s' and `order` = %s)data) where table_name = '%s' and parent = %s;", tableName, fileName,order, tableName, id));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
+
+    @Test
+    public void test789() {
+        AtomicInteger atomicInteger = new AtomicInteger();
+        System.out.println(atomicInteger.get());
+        System.out.println(atomicInteger.getAndIncrement());
+        System.out.println(atomicInteger.get());
+    }
+
+    @Test
+    public void test7890() {
+        List<User> list = new ArrayList<>();
+        list.add(User.builder().id(1L).name("小明").build());
+        list.add(User.builder().id(2L).name("liushan").build());
+        List<User> collect = list.stream().peek(e -> {
+            if (e.getId() == 1) {
+                e.setName("1111");
+            }
+        }).collect(Collectors.toList());
+        System.out.println(collect);
+    }
+
+
+
+
 }
