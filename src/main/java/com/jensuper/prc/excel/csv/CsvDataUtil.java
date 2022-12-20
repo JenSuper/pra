@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class CsvDataUtil {
 
-    private String fileCode = "";
+    private String fileCode = "utf-8";
 
 
     public List<String[]> readCsv(InputStream inputStream) throws Exception {
