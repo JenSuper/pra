@@ -2,12 +2,14 @@ package com.jensuper.prc.demo;
 
 import cn.hutool.core.io.FileUtil;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.jensuper.prc.aop.entity.Record;
 import com.jensuper.prc.entity.SankeyChartData;
 import com.jensuper.prc.entity.TreeDTO;
 import com.jensuper.prc.entity.User;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.http.HttpResponse;
@@ -238,6 +240,22 @@ public class Demo {
             //System.out.println(EntityUtils.toString(response.getEntity()));
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    
+    @Test
+    public void testP() throws InterruptedException {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "https://fchxxn.com/api/Pay/CheckOrder?productid=6b419bee74244f93bb4d57b02bb71d12&id=";
+        while (true) {
+            Thread.sleep(RandomUtils.nextInt(1,10000));
+            String id = UUID.randomUUID().toString().replace("-", "");
+            ResponseEntity<String> forEntity = restTemplate.getForEntity(url + id, String.class);
+            JSONObject jsonObject = JSON.parseObject(forEntity.getBody());
+            if ((Boolean) jsonObject.get("success")) {
+                System.out.println(forEntity);
+                break;
+            }
         }
     }
     
