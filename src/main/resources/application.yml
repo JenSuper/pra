@@ -3,12 +3,12 @@ server:
 spring:
   mail:
     host: smtp.163.com
-    username: JenSuper@163.com
-    password: JC19950217
+    username:
+    password:
     properties:
-      from: JenSuper@163.com
+      from:
 sentry:
-  dsn: https://f7ba01ead9c842e2a1186854d93ee7b2@o1167981.ingest.sentry.io/6259759
+  dsn:
   # Set traces-sample-rate to 1.0 to capture 100% of transactions for performance monitoring.
   # We recommend adjusting this value in production.
   traces-sample-rate: 1.0
