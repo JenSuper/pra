@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
  * 实体
  * </p>
  *
- * @author jichao
  * @date 2022/6/14 12:03
  * @since
  */

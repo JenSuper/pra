@@ -37,7 +37,7 @@ public class ThreadLocalNormalUse {
      * @return
      */
     private String convertDate(int time) {
-        Date date = new Date(time * 1000);
+        Date date = new Date(time * 2000);
         return simpleDateFormat.format(date);
     }
 }

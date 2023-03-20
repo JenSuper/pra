@@ -284,6 +284,25 @@ public class ExcelUtils {
     }
 
     /**
+     * 生成title
+     * @param sheet
+     * @param excelSheetPO
+     * @param wb
+     * @param version
+     */
+    private static void createTitle2(Sheet sheet, ExcelSheetPO excelSheetPO, Workbook wb, ExcelVersion version) {
+        Row titleRow = sheet.createRow(0);
+        Cell titleCel = titleRow.createCell(0);
+        excelSheetPO.setTitle("123");
+        titleCel.setCellValue(excelSheetPO.getTitle());
+//        titleCel.setCellStyle(getStyle(STYLE_TITLE, wb));
+        // 限制最大列数
+        int column = excelSheetPO.getDataList().size() > version.getMaxColumn() ? version.getMaxColumn()
+                : excelSheetPO.getDataList().size();
+        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, column - 1));
+    }
+
+    /**
      * 获取样式style
      * @param version
      * @return

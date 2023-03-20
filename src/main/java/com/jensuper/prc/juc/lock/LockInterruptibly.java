@@ -25,6 +25,7 @@ public class LockInterruptibly implements Runnable {
         thread1.start();
 
         try {
+            // 等待
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();

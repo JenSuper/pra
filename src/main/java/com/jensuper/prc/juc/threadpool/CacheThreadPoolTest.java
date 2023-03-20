@@ -10,10 +10,12 @@ import java.util.concurrent.Executors;
  * @date 2020/08/29
  */
 public class CacheThreadPoolTest {
+
     public static void main(String[] args) {
 
         ExecutorService executorService = Executors.newCachedThreadPool();
         for (int i = 0; i < 1000; i++) {
+            System.out.println(i);
             executorService.execute(new ProcessTask());
         }
         executorService.shutdown();
