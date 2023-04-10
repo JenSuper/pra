@@ -264,7 +264,7 @@ public class Demo {
     public void test222(){
         RestTemplate restTemplate = new RestTemplate();
         String url = "http://aliv18.data.moji.com/whapi/json/alicityweather/condition";
-        String appcode = "e42fd2c1c87c4955a0ef12d585c9dcbe";
+        String appcode = "";
         // headers
         HttpHeaders requestHeaders = new HttpHeaders();
         //最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
@@ -274,19 +274,12 @@ public class Demo {
         //body
         MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
         requestBody.add("cityId", "2");
-        requestBody.add("token", "50b53ff8dd7d9fa320d3d3ca32cf8ed1");
+        requestBody.add("token", "");
         //HttpEntity
         HttpEntity<MultiValueMap> requestEntity = new HttpEntity<MultiValueMap>(requestBody, requestHeaders);
         //post
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, requestEntity, String.class);
         System.out.println(responseEntity.getBody());
-    }
-
-    @Test
-    public void test123132(){
-        String format = "13%s,%s,table=%s";
-        String format1 = String.format(format, "one", "two", "%s");
-        System.out.println(String.format(format1, "three"));
     }
 
 
@@ -353,11 +346,15 @@ public class Demo {
 
     @Test
     public void test1233123(){
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start("test");
         List<Record> listNew = new ArrayList<>();
         List<Record> list = new ArrayList<>();
         list.stream().collect(Collectors.groupingBy(Record::getBegin)).forEach((k,v)->{
             listNew.addAll(v.stream().distinct().collect(Collectors.toList()));
         });
+        stopWatch.stop();
+        System.out.println(stopWatch.prettyPrint());
     }
 
     @Test
@@ -400,8 +397,9 @@ public class Demo {
     
     @Test
     public void test3() {
-        DecimalFormat format = new DecimalFormat("###,##0");
+        DecimalFormat format = new DecimalFormat("###,##00");
         String s = format.format(9050173587L);
+        System.out.println(s);
     }
 
     /**
