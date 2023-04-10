@@ -1,6 +1,5 @@
 package com.jensuper.prc.util;
 
-import com.bigone.ros.common.constants.Constants;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -265,31 +264,7 @@ public class NumberUtil {
         }
     }
 
-    public static Integer roundToZero(Integer num) {
-        if (num == null) {
-            return Constants.ZERO;
-        } else if (num < Constants.TEN) {
-            return Constants.TEN;
-        } else {
-            new BigDecimal(0);
-            String numStr = String.valueOf(num);
-            BigDecimal pow = (new BigDecimal(Constants.TEN)).pow(numStr.length() - Constants.ONE);
-            Integer indexTwo = Integer.valueOf(numStr.substring(Constants.ZERO, Constants.ONE));
-            BigDecimal numRound;
-            if (Integer.valueOf(numStr.substring(Constants.ONE, Constants.TWO)) >= Constants.FIVE) {
-                numRound = (new BigDecimal(indexTwo + Constants.ONE)).multiply(pow);
-            } else {
-                numRound = (new BigDecimal(indexTwo)).multiply(pow);
-            }
 
-            return numRound.intValue();
-        }
-    }
-
-    public static String matchMomOrYoyForPercentage(Object molecular, Object denominator) {
-        Double v = matchMomOrYoyForPercentageNum(molecular, denominator, Constants.TWO, 100L);
-        return Objects.isNull(v) ? null : (new BigDecimal(String.valueOf(v))).doubleValue() + "%";
-    }
 
     public static Double matchMomOrYoyForPercentageNum(Object molecular, Object denominator, int scale, Long multiplier) {
         BigDecimal v = divideAndMultiplyNumForMomOrYoy(molecular, denominator, scale, multiplier);
