@@ -42,7 +42,7 @@ public class AsyncService {
                 movies.stream().filter(movie -> movie.startsWith(start)).collect(Collectors.toList());
         // 模拟这是一个耗时的任务
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(2000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

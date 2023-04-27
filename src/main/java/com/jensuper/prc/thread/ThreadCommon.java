@@ -16,7 +16,7 @@ public class ThreadCommon implements Runnable {
 
 
     private Integer addVar() {
-        int i = threadLocal.get() + 1;
+        int i = threadLocal.get() + 2;
         threadLocal.set(i);
         return threadLocal.get();
     }

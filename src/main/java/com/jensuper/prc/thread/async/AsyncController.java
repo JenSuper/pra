@@ -51,6 +51,9 @@ public class AsyncController {
                         .collect(Collectors.toList());
         // CompletableFuture.join（）方法可以获取他们的结果并将结果连接起来
         List<List<String>> results = completableFutureList.stream().map(CompletableFuture::join).collect(Collectors.toList());
+        results.stream().forEach(rL->{
+            System.out.println(rL);
+        });
         // 打印结果以及运行程序运行花费时间
         System.out.println("Elapsed time: " + (System.currentTimeMillis() - start));
 
