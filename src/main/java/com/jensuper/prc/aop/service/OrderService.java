@@ -13,4 +13,9 @@ public interface OrderService {
      */
     void add();
 
+    /**
+     * 新增
+     */
+    void addFour();
+
 }

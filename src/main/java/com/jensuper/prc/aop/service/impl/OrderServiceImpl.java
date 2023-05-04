@@ -3,6 +3,7 @@ package com.jensuper.prc.aop.service.impl;
 import com.jensuper.prc.aop.monitor.Monitor;
 import com.jensuper.prc.aop.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.StopWatch;
 
 /**
  * @author jichao
@@ -25,5 +26,17 @@ public class OrderServiceImpl implements OrderService {
         }
         // 结束监控
         Monitor.end();
+    }
+
+    @Override
+    public void addFour() {
+        StopWatch stopWatch = new StopWatch();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        stopWatch.stop();
+        System.out.println(stopWatch.prettyPrint());
     }
 }

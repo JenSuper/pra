@@ -31,6 +31,7 @@ public class Init {
     public void test(){
         this.set();
         orderService.add();
+        orderService.addFour();
     }
 
     /**
