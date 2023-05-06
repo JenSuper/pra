@@ -1,4 +1,4 @@
-package com.jensuper.prc.bigone;
+package com.jensuper.prc.btest;
 
 import com.googlecode.aviator.AviatorEvaluator;
 import org.junit.Test;

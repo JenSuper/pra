@@ -1,4 +1,4 @@
-package com.jensuper.prc.bigone;
+package com.jensuper.prc.btest;
 
 import com.google.common.collect.Lists;
 import org.apache.commons.io.FileUtils;
