@@ -13,13 +13,13 @@ import java.util.List;
  * 品牌合并关键词
  * </p>
  *
- * @author jichao
  * @date 2022/1/13 16:39
  * @since
  */
 public class DataSourceBrand {
 
     public static void main(String[] args) throws IOException {
+
         String sourcePath = "/Users/chaoji/devlop/project/小红书品牌.csv";
         String sinkPath = "/Users/chaoji/devlop/project/小红书品牌_合并.csv";
 

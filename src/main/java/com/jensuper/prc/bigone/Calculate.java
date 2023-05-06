@@ -13,6 +13,9 @@ import org.junit.Test;
  * @since
  */
 public class Calculate {
+    /**
+     * AviatorEvaluator 计算
+     */
     @Test
     public void test() {
         Object result = AviatorEvaluator.execute("1+2+3");

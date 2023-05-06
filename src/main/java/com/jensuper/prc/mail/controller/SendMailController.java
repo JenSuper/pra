@@ -41,7 +41,7 @@ public class SendMailController {
     @PostMapping("/test")
     public void test(MailVo mailVo, MultipartFile[] files) {
         User user = new User();
-        user.setEmail("jenSuper@163.com");
+        user.setEmail("test@163.com");
         Sentry.setUser(user);
         log.error("error");
         log.warn("warn");
